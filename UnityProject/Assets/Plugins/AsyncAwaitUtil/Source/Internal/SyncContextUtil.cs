@@ -13,7 +13,11 @@ namespace UnityAsyncAwaitUtil
 #if UNITY_EDITOR
         [UnityEditor.Callbacks.DidReloadScripts]
 #endif
+#if UNITY_2019_1_OR_NEWER
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
+#else
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+#endif
         static void Install()
         {
             UnitySynchronizationContext = SynchronizationContext.Current;
